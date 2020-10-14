@@ -1,6 +1,7 @@
 // model files need to be excucuted at top level to work throuout application
 require("./models/User");
 require("./models/Track");
+require("dotenv").config({ path: "src/.env" });
 //create express server
 
 const express = require("express");
@@ -9,7 +10,7 @@ const requireAuth = require("./middlewares/requireAuth");
 const mongoose = require("mongoose");
 //need to import the routes
 const authRoutes = require("./routes/uathRoutes");
-const trackRoutes = require('./routes/trackRoutes');
+const trackRoutes = require("./routes/trackRoutes");
 const bodyParser = require("body-parser");
 const app = express();
 //make use of bodyParser must be before the Routes
@@ -19,8 +20,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri =
-  "mongodb+srv://Admin:Amahakal1976!@cluster0.dquke.mongodb.net/Tracks?retryWrites=true&w=majority";
+const mongoUri = process.env.DATABASE_URI;
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useCreateIndex: true,
