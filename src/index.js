@@ -23,7 +23,7 @@ app.use(trackRoutes);
 const mongoUri = process.env.DATABASE_URI;
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
-  useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 
 //to know we are connected to mongo db
